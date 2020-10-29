@@ -2,6 +2,12 @@
 
 Simple project to send note to your own email with a simple PWA app. Other goal of the project is to participate on hacktoberfest and try to be helpful at the same time.
 
+## Libs
+
+- React 17
+- Next.js 10
+- Tailwind CSS 1.9.0
+
 ## Dependencies
 
 - Vercel account
