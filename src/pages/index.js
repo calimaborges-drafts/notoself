@@ -6,7 +6,6 @@ export function getStaticProps() {
   return {
     props: {
       mailTo: process.env.NOTE_EMAIL || null
-    },
-    revalidate: 1
+    }
   }
 }
