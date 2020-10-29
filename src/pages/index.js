@@ -1,5 +1,5 @@
 export default function Index({ mailTo }) {
-  return <h1>Hello, {mailTo}!</h1>;
+  return <div><h1>Hello, {mailTo}!</h1></div>;
 }
 
 export function getServerSideProps() {
