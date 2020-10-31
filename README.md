@@ -1,6 +1,6 @@
 # notoself
 
-Simple project to send note to your own email with a simple PWA app. Other goal of the project is to participate on hacktoberfest and try to be helpful at the same time.
+Project to send note to your own email with a simple PWA app.
 
 ## Libs
 
@@ -18,7 +18,8 @@ Simple project to send note to your own email with a simple PWA app. Other goal 
 To make it work you will have to:
 
 - Set the following environment variables:
-  - `NOTE_EMAIL`
-- Deploy it to Vercel
-- Access http://yourdomain.com/MAIL_GUN_KEY (something like `key-213n123n132n123n123j12...`)
-- You have to run with the key just the first time. It will be stored at your browser for future use.
+  - `NOTE_EMAIL` (https://nextjs.org/docs/basic-features/environment-variables)
+- Deploy it to Vercel 
+- Access http://yourdomain.com/register?key=MAILGUN_KEY&domain=MAILGUN_DOMAIN to register mailgun data. 
+  - **!!Your mailgun data will be stored in your browser!!**
+  - Key can be obtained here: https://app.mailgun.com/app/account/security/api_keys
