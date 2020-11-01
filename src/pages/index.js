@@ -5,9 +5,9 @@ export default function Index({ mailTo }) {
     event.preventDefault();
 
     const noteEl = event.target.elements.namedItem("note");
-    const { key, domain } = await localForage.getItem("notoself-config");
+    const config = await localForage.getItem("notoself-config");
 
-    if (!key || !domain) {
+    if (!config || !config.key || !config.domain) {
       throw new Error("key and domain must be set at /register");
     }
 
@@ -15,8 +15,8 @@ export default function Index({ mailTo }) {
       method: "POST",
       body: JSON.stringify({
         note: noteEl.value,
-        key,
-        domain,
+        key: config.key,
+        domain: config.domain,
       }),
     });
     noteEl.value = "";
