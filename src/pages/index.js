@@ -1,4 +1,5 @@
 import localForage from "localforage";
+import Link from "next/link";
 
 export default function Index({ mailTo }) {
   async function handleSubmit(event) {
@@ -24,11 +25,25 @@ export default function Index({ mailTo }) {
   }
 
   return (
-    <div>
-      <h1>Hello, {mailTo}!</h1>
-      <form onSubmit={handleSubmit}>
-        <textarea name="note" />
-        <button type="submit">Send note</button>
+    <div className="p-12 max-w-screen-lg m-auto antialiased h-screen flex flex-col">
+      <h1 className="text-xl">📋 Notoself</h1>
+      <form className="mt-8 flex flex-col flex-grow" onSubmit={handleSubmit}>
+        <textarea
+          className="p-2 border rounded flex-grow text-lg"
+          name="note"
+          required
+        />
+        <button
+          className="mt-4 p-2 bg-blue-800 rounded text-lg text-white uppercase font-semibold shadow-lg tracking-wider"
+          type="submit"
+        >
+          Send note
+        </button>
+        <Link href="/register">
+          <a className="mt-4 p-2 bg-gray-300 rounded text-lg text-gray-700 uppercase font-semibold text-center  tracking-wider">
+            Register
+          </a>
+        </Link>
       </form>
     </div>
   );
