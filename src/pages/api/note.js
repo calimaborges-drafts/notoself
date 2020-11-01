@@ -1,5 +1,6 @@
 import * as mailgun from "mailgun.js";
 
+// TODO: use environment variables and secret key to validate
 export default async function handler(req, res) {
   if (req.method === "POST") {
     if (!process.env.NOTE_EMAIL) {

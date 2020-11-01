@@ -3,6 +3,10 @@ import Link from "next/link";
 import { css, container, button, input } from "../libs/tailwind-classes";
 
 export default function Index() {
+  // TODO: verify if secret is informed
+  // TODO: if not redirect to register
+  // TODO: Remove register link button since it will be redirected automatically
+  
   async function handleSubmit(event) {
     event.preventDefault();
 
