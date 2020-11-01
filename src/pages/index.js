@@ -1,15 +1,22 @@
-import { useRouter } from "next/router";
+import localForage from "localforage";
 
 export default function Index({ mailTo }) {
   async function handleSubmit(event) {
     event.preventDefault();
+
     const noteEl = event.target.elements.namedItem("note");
+    const config = await localForage.getItem("notoself-config");
+
+    if (!config || !config.key || !config.domain) {
+      throw new Error("key and domain must be set at /register");
+    }
+
     const response = await fetch("/api/note", {
       method: "POST",
       body: JSON.stringify({
         note: noteEl.value,
-        key: null, // FIXME: Register should store and this should get it
-        domain: null // FIXME: Register should store and this should get it
+        key: config.key,
+        domain: config.domain,
       }),
     });
     noteEl.value = "";
