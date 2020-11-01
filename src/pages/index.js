@@ -1,7 +1,8 @@
 import localForage from "localforage";
 import Link from "next/link";
+import { css, container, button, input } from "../libs/tailwind-classes";
 
-export default function Index({ mailTo }) {
+export default function Index() {
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -12,7 +13,7 @@ export default function Index({ mailTo }) {
       throw new Error("key and domain must be set at /register");
     }
 
-    const response = await fetch("/api/note", {
+    await fetch("/api/note", {
       method: "POST",
       body: JSON.stringify({
         note: noteEl.value,
@@ -21,28 +22,25 @@ export default function Index({ mailTo }) {
       }),
     });
     noteEl.value = "";
-    const json = await response.json();
   }
 
   return (
-    <div className="p-12 max-w-screen-lg m-auto antialiased h-screen flex flex-col">
+    <div className={container}>
       <h1 className="text-xl">📋 Notoself</h1>
-      <form className="mt-8 flex flex-col flex-grow" onSubmit={handleSubmit}>
+      <form className="mt-6 flex flex-col flex-grow" onSubmit={handleSubmit}>
         <textarea
-          className="p-2 border rounded flex-grow text-lg"
+          className={css(input, "flex-grow text-lg")}
           name="note"
           required
         />
         <button
-          className="mt-4 p-2 bg-blue-800 rounded text-lg text-white uppercase font-semibold shadow-lg tracking-wider"
+          className={css(button, "mt-4 bg-blue-800 text-white shadow-lg")}
           type="submit"
         >
           Send note
         </button>
         <Link href="/register">
-          <a className="mt-4 p-2 bg-gray-300 rounded text-lg text-gray-700 uppercase font-semibold text-center  tracking-wider">
-            Register
-          </a>
+          <a className={css(button, "mt-4 bg-gray-300 text-gray-700")}>Register</a>
         </Link>
       </form>
     </div>
