@@ -17,9 +17,10 @@ Project to send note to your own email with a simple PWA app.
 
 To make it work you will have to:
 
-- Set the following environment variables:
-  - `NOTE_EMAIL` (https://nextjs.org/docs/basic-features/environment-variables)
+- Set the following environment variables (https://nextjs.org/docs/basic-features/environment-variables):
+  - `NOTE_EMAIL`: Email which will receive note
+  - `MAILGUN_KEY`: Mailgun API key (https://app.mailgun.com/app/account/security/api_keys)
+  - `MAILGUN_DOMAIN`: Mailgun domain
+  - `SECRET_KEY`: Secret key that will be needed to use the app
 - Deploy it to Vercel 
-- Access http://yourdomain.com/register to register mailgun data. 
-  - **!!Your mailgun data will be stored in your browser!!**
-  - Key can be obtained here: https://app.mailgun.com/app/account/security/api_keys
+- Access http://yourdomain.com/register to register secret key.

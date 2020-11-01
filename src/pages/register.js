@@ -8,11 +8,9 @@ export default function Register() {
 
   async function register(event) {
     event.preventDefault();
-
     const key = event.target.elements.namedItem("key").value;
-    const domain = event.target.elements.namedItem("domain").value;
 
-    await localForage.setItem("notoself-config", { key, domain });
+    await localForage.setItem("notoself-secret", key);
     router.push("/");
   }
 
@@ -21,14 +19,9 @@ export default function Register() {
       <h1 className="text-xl">📋 Notoself</h1>
 
       <label className={css(label, "mt-4")} htmlFor="key">
-        Mail gun key:
+        Secret key:
       </label>
       <input className={input} id="key" name="key" type="password" required />
-
-      <label className={css(label, "mt-2")} htmlFor="domain">
-        Mail gun domain:
-      </label>
-      <input className={input} id="domain" name="domain" type="text" required />
 
       <button
         className={css(button, "mt-4 bg-blue-800 text-white shadow-lg")}
@@ -37,8 +30,8 @@ export default function Register() {
         Register
       </button>
       <Link href="/">
-          <a className={css(button, "mt-4 bg-gray-300 text-gray-700")}>Back</a>
-        </Link>
+        <a className={css(button, "mt-4 bg-gray-300 text-gray-700")}>Back</a>
+      </Link>
     </form>
   );
 }

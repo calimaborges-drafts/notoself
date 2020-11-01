@@ -2,21 +2,31 @@ import * as mailgun from "mailgun.js";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    if (!process.env.NOTE_EMAIL) {
-      throw new Error("NOTE_EMAIL environment variable not defined");
+    const noteEmail = process.env.NOTE_EMAIL;
+    const key = process.env.MAILGUN_KEY;
+    const domain = process.env.MAILGUN_DOMAIN;
+    const secretKey = process.env.SECRET_KEY;
+
+    if (!noteEmail || !key || !domain || !secretKey) {
+      throw new Error("Environment variables not defined");
     }
 
     let sent = false;
-    const { key, domain, note } = JSON.parse(req.body);
+    const { secret, note } = JSON.parse(req.body);
+
+    if (secret !== secretKey) {
+      throw new Error("Secret key does not match");
+    }
+
     const data = {
       from: `Notoself <noreply-notoself@${domain}>`,
-      to: [process.env.NOTE_EMAIL],
+      to: [noteEmail],
       subject: note,
       text: note,
     };
 
     if (key && domain) {
-      const mg = mailgun.client({ username: "api", key: key });
+      const mg = mailgun.client({ username: "api", key });
       await mg.messages.create(domain, data);
       sent = true;
     }

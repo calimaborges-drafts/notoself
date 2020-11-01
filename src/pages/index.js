@@ -1,25 +1,33 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+
 import localForage from "localforage";
-import Link from "next/link";
 import { css, container, button, input } from "../libs/tailwind-classes";
 
 export default function Index() {
+  const router = useRouter();
+
+  useEffect(() => {
+    localForage.getItem("notoself-secret").then((secretKey) => {
+      if (!secretKey) {
+        router.push("/register");
+      }
+    });
+  }, [router]);
+
   async function handleSubmit(event) {
     event.preventDefault();
 
     const noteEl = event.target.elements.namedItem("note");
-    const config = await localForage.getItem("notoself-config");
+    const secret = await localForage.getItem("notoself-secret");
 
-    if (!config || !config.key || !config.domain) {
-      throw new Error("key and domain must be set at /register");
+    if (!secret) {
+      router.push("/register");
     }
 
     await fetch("/api/note", {
       method: "POST",
-      body: JSON.stringify({
-        note: noteEl.value,
-        key: config.key,
-        domain: config.domain,
-      }),
+      body: JSON.stringify({ note: noteEl.value, secret }),
     });
     noteEl.value = "";
   }
@@ -39,9 +47,6 @@ export default function Index() {
         >
           Send note
         </button>
-        <Link href="/register">
-          <a className={css(button, "mt-4 bg-gray-300 text-gray-700")}>Register</a>
-        </Link>
       </form>
     </div>
   );
