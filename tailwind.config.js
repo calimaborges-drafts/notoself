@@ -8,6 +8,9 @@ module.exports = {
     extend: {
     },
   },
-  variants: {},
+  variants: {
+    opacity: ['responsive', 'hover', 'focus', 'disabled'],
+    cursor: ['disabled']
+  },
   plugins: [],
 };
