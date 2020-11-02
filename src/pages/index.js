@@ -32,10 +32,10 @@ export default function Index() {
         method: "POST",
         body: JSON.stringify({ note: noteEl.value, secret }),
       });
+      noteEl.value = "";
     } finally {
       setLoading(false);
     }
-    noteEl.value = "";
   }
 
   return (
