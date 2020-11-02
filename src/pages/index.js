@@ -37,7 +37,7 @@ export default function Index() {
       <h1 className="text-xl">📋 Notoself</h1>
       <form className="mt-6 flex flex-col flex-grow" onSubmit={handleSubmit}>
         <textarea
-          className={css(input, "flex-grow text-lg")}
+          className={css(input, "h-64 text-lg")}
           name="note"
           required
         />
